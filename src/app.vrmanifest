@@ -4,7 +4,7 @@
 		{
 			"app_key": "i5ucc.VRCDiscordMute",
 			"launch_type": "binary",
-			"binary_path_windows": "./VRCDiscordMute.exe",
+			"binary_path_windows": "./VRCDiscordMute_NoConsole.exe",
 			"is_dashboard_overlay": true,
 
 			"strings": {
