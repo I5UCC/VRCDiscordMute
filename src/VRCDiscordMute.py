@@ -2,9 +2,20 @@ import keyboard
 import configparser
 from pythonosc import dispatcher
 from pythonosc import osc_server
+import openvr
+import os
+import sys
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+def resource_path(relative_path):
+    """Gets absolute path from relative path"""
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+application = openvr.init(openvr.VRApplication_Utility)
+appmanifest_path = resource_path(config["config"]["AppManifestFile"])
 
 def handle_mute_event(addr, value):
   if not value:

@@ -1,0 +1,18 @@
+{
+	"source": "builtin",
+	"applications": [
+		{
+			"app_key": "i5ucc.VRCDiscordMute",
+			"launch_type": "binary",
+			"binary_path_windows": "./VRCDiscordMute.exe",
+			"is_dashboard_overlay": true,
+
+			"strings": {
+				"en_us": {
+					"name": "VRCDiscordMute",
+					"description": "Mutes you on discord whenever you are unmuted in VRChat."
+				}
+			}
+		}
+	]
+}
