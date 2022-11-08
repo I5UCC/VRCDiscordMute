@@ -9,23 +9,26 @@ import atexit
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+PushToMuteKey = config["config"]["PushMuteKey"]
 
 def resource_path(relative_path):
     """Gets absolute path from relative path"""
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-application = openvr.init(openvr.VRApplication_Utility)
-appmanifest_path = resource_path(config["config"]["AppManifestFile"])
 
 def handle_mute_event(addr, value):
   if not value:
-    keyboard.press(config["config"]["PushMuteKey"])
+    keyboard.press(PushToMuteKey)
   else:
-    keyboard.release(config["config"]["PushMuteKey"])
+    keyboard.release(PushToMuteKey)
+
 
 def exit_handler():
-  keyboard.release(config["config"]["PushMuteKey"])
+  keyboard.release(PushToMuteKey)
+
+application = openvr.init(openvr.VRApplication_Utility)
+appmanifest_path = resource_path(config["config"]["AppManifestFile"])
 
 dispatcher = dispatcher.Dispatcher()
 dispatcher.map("/avatar/parameters/MuteSelf", handle_mute_event)

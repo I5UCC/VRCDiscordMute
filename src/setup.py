@@ -15,5 +15,5 @@ setup(
     version="0.3.1",
     description="ThumbParamsOSC",
     options={"build_exe": build_exe_options},
-    executables=[Executable("VRCDiscordMute.py", targetName="VRCDiscordMute.exe", base=False), Executable("VRCDiscordMute.py", targetName="VRCDiscordMute_NoConsole.exe", base="Win32GUI")],
+    executables=[Executable("VRCDiscordMute.py", targetName="VRCDiscordMute.exe", base=False), Executable("VRCDiscordMute.py", targetName="VRCDiscordMute_NoConsole.exe", base="Win32GUI"), Executable("GetHotkeyName.py", targetName="GetHotkeyName.exe", base=False)],
 )
