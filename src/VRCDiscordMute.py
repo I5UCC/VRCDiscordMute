@@ -7,9 +7,6 @@ import os
 import sys
 import atexit
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-PushToMuteKey = config["config"]["PushMuteKey"]
 
 def resource_path(relative_path):
     """Gets absolute path from relative path"""
@@ -27,13 +24,21 @@ def handle_mute_event(addr, value):
 def exit_handler():
   keyboard.release(PushToMuteKey)
 
-application = openvr.init(openvr.VRApplication_Utility)
-appmanifest_path = resource_path(config["config"]["AppManifestFile"])
 
-dispatcher = dispatcher.Dispatcher()
-dispatcher.map("/avatar/parameters/MuteSelf", handle_mute_event)
+try:
+  config = configparser.ConfigParser()
+  config.read(resource_path('config.ini'))
+  PushToMuteKey = config["config"]["PushMuteKey"]
+  keyboard.release(PushToMuteKey)
+  application = openvr.init(openvr.VRApplication_Utility)
+  appmanifest_path = resource_path(config["config"]["AppManifestFile"])
 
-server = osc_server.ThreadingOSCUDPServer((config["config"]["IP"], int(config["config"]["Port"])), dispatcher)
-print(f"Listening to {server.server_address}\nPushMuteKey: {config['config']['PushMuteKey']}")
-atexit.register(exit_handler)
-server.serve_forever()
+  dispatcher = dispatcher.Dispatcher()
+  dispatcher.map("/avatar/parameters/MuteSelf", handle_mute_event)
+
+  server = osc_server.ThreadingOSCUDPServer((config["config"]["IP"], int(config["config"]["Port"])), dispatcher)
+  print(f"Listening to {server.server_address}\nPushMuteKey: {config['config']['PushMuteKey']}")
+  atexit.register(exit_handler)
+  server.serve_forever()
+except Exception:
+  exit_handler()
