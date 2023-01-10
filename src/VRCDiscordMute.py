@@ -25,14 +25,20 @@ def exit_handler():
   keyboard.release(PushToMuteKey)
 
 
+config = configparser.ConfigParser()
+config.read(resource_path('config.ini'))
+PushToMuteKey = config["config"]["PushMuteKey"]
+
+# Init openvr
 try:
-  config = configparser.ConfigParser()
-  config.read(resource_path('config.ini'))
-  PushToMuteKey = config["config"]["PushMuteKey"]
-  keyboard.release(PushToMuteKey)
   application = openvr.init(openvr.VRApplication_Utility)
   appmanifest_path = resource_path(config["config"]["AppManifestFile"])
+  openvr.VRApplications().addApplicationManifest(appmanifest_path)
+except Exception:
+  pass
 
+try:
+  handle_mute_event(None, True)
   dispatcher = dispatcher.Dispatcher()
   dispatcher.map("/avatar/parameters/MuteSelf", handle_mute_event)
 
