@@ -1,4 +1,4 @@
-# VRCDiscordMute
+# VRCDiscordMute [![Github All Releases](https://img.shields.io/github/downloads/i5ucc/VRCDiscordMute/total.svg)](https://github.com/I5UCC/VRCDiscordMute/releases/latest)
 A simple python program that mutes you on discord whenever you are unmuted in VRChat.
 
 It does this by using a ***Push to Mute*** Keybind in Discord. <br>
