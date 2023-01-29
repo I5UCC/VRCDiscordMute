@@ -7,6 +7,7 @@ import os
 import sys
 import atexit
 
+enabled = True
 
 def resource_path(relative_path):
     """Gets absolute path from relative path"""
@@ -15,15 +16,22 @@ def resource_path(relative_path):
 
 
 def handle_mute_event(addr, value):
-  if not value:
+  global enabled
+  
+  if not value and enabled:
     keyboard.press(PushToMuteKey)
   else:
     keyboard.release(PushToMuteKey)
 
 
-def exit_handler():
-  keyboard.release(PushToMuteKey)
+def set_enabled(addr, value):
+  global enabled
 
+  if value:
+    enabled = False
+    handle_mute_event(None, True)
+  else:
+    enabled = True
 
 config = configparser.ConfigParser()
 config.read(resource_path('config.ini'))
@@ -41,10 +49,11 @@ try:
   handle_mute_event(None, True)
   dispatcher = dispatcher.Dispatcher()
   dispatcher.map("/avatar/parameters/MuteSelf", handle_mute_event)
+  dispatcher.map("/avatar/parameters/DisableDiscordMute", set_enabled)
 
   server = osc_server.ThreadingOSCUDPServer((config["config"]["IP"], int(config["config"]["Port"])), dispatcher)
   print(f"Listening to {server.server_address}\nPushMuteKey: {config['config']['PushMuteKey']}")
-  atexit.register(exit_handler)
+  atexit.register(lambda: handle_mute_event(None, True))
   server.serve_forever()
 except Exception:
-  exit_handler()
+  handle_mute_event(None, True)
