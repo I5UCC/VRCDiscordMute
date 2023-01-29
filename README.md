@@ -8,3 +8,12 @@ If you are unsure what the key is called you can run ***GetHotkeyName.py/GetHotk
 This project is using the [Python Keyboard Package](https://github.com/boppreh/keyboard) <br>
 
 On first startup of the program, the program will register its manifest into SteamVR to allow AutoStarting like any other Overlay application on SteamVR.
+
+## OSC Troubleshoot
+
+If you have problems with this program, try this to fix it:
+- Close VRChat.
+- Open 'Run' in Windows (Windows Key + R)
+- Type in `%APPDATA%\..\LocalLow\VRChat\VRChat`
+- Delete the ***contents*** of the OSC folder. (***If you use [VOR](https://github.com/SutekhVRC/VOR) you probably dont want to delete the folder called 'VOR'***)
+- Startup VRChat again and it should work.
