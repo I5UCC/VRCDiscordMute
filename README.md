@@ -9,6 +9,8 @@ This project is using the [Python Keyboard Package](https://github.com/boppreh/k
 
 On first startup of the program, the program will register its manifest into SteamVR to allow AutoStarting like any other Overlay application on SteamVR.
 
+You can add the ```DisableDiscordMute``` parameter to your Avatar to Turn VRCDiscrdMute OFF/ON.
+
 ## OSC Troubleshoot
 
 If you have problems with this program, try this to fix it:
