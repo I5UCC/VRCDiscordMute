@@ -12,5 +12,5 @@ setup(
     version="0.2",
     description="VRCDiscordMute",
     options={"build_exe": build_exe_options},
-    executables=[Executable("VRCDiscordMute.py", targetName="VRCDiscordMute.exe", base=False), Executable("VRCDiscordMute.py", targetName="VRCDiscordMute_NoConsole.exe", base="Win32GUI"), Executable("GetHotkeyName.py", targetName="GetHotkeyName.exe", base=False)],
+    executables=[Executable("VRCDiscordMute.py", target_name="VRCDiscordMute.exe", base=False), Executable("VRCDiscordMute.py", target_name="VRCDiscordMute_NoConsole.exe", base="Win32GUI"), Executable("GetHotkeyName.py", target_name="GetHotkeyName.exe", base=False)],
 )
