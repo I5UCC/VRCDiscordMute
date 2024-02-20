@@ -11,7 +11,7 @@ import openvr
 AVATAR_CHANGE_PARAMETER = "/avatar/change"
 PARAMETER_PREFIX = "/avatar/parameters/"
 MUTESELF_PARAMETER = PARAMETER_PREFIX + "MuteSelf"
-VOICE_PARAMETER = PARAMETER_PREFIX + "Voice"
+DISABLE_PARAMETER = PARAMETER_PREFIX + "DisableDiscordMute"
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s [%(levelname)s] %(message)s")
@@ -75,6 +75,12 @@ def main_loop():
     last_state = state
 
     while is_running():
+        disable = qclient.query_node(DISABLE_PARAMETER)
+        if disable and disable.value[0]:
+            logging.warning("Discord Mute is disabled!")
+            time.sleep(3)
+            continue
+
         state = qclient.query_node(MUTESELF_PARAMETER)
         if state and state.value[0] != last_state.value[0]:
             logging.info(
