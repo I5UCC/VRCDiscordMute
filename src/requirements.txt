@@ -1,5 +1,5 @@
 openvr
-python_osc
 zeroconf
 requests
 keyboard
+psutil
