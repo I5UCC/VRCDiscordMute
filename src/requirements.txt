@@ -1,5 +1,5 @@
 openvr
-zeroconf
+zeroconf==0.119.0
 requests
 keyboard
 psutil
